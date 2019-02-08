@@ -1,0 +1,47 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+library(topomatch)
+```
+# topomatch
+
+Helper function for matching toponyms from different sources, that can
+be written in slightly different ways. Allows to inspect the matching
+and act accordingly.
+
+```{r example}
+countries1 <- raster::ccodes()$NAME
+countries2 <- unique(maps::world.cities$country.etc)
+
+(country_matches <- topomatch(countries1, countries2))
+
+str(country_matches)
+```
+
+
+Wraps local-global alignment algorithm borrwed from bioConductor
+package `Biostrings`. Works better than global alignment and requires
+less fine-tuning (although is considerably slower too)
+https://ro-che.info/articles/2016-12-11-local-alignment. 
+
+## Installation
+
+```r
+remotes::install_github("Cirad-ASTRE/topomatch")
+```
+
+<!-- You can install the released version of topomatch from [CRAN](https://CRAN.R-project.org) with: -->
+
+<!-- ``` r -->
+<!-- install.packages("topomatch") -->
+<!-- ``` -->
