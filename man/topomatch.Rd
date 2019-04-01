@@ -16,10 +16,14 @@ A matrix with x in rows and candidates in columns with matching
   scores.
 }
 \description{
-Toponomy matching
+Match a list of toponyms agains a list of candidates.
+}
+\details{
+For comparison, strings are trimmed off whitespaces, converted to
+upper-case and special characters transliterated to ASCII.
 }
 \examples{
-  x <- c("aba", "Efé", "IJI", "kkk")
-  cand <- c("aba", "efe", "iji", "opo", "Uvu")
+  x <- c("abá", "Efé", "IJI", "kkk")
+  cand <- c("aba", "ef", "iji", "opo", "Uvu")
   topomatch(x, cand)
 }
