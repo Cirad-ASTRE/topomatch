@@ -1,7 +1,7 @@
 Package: topomatch
 Type: Package
 Title: Match toponyms by similarity
-Version: 0.1
+Version: 0.2
 Author: Facundo Muñoz <facundo.munoz@cirad.fr>
 Maintainer: Facundo Muñoz <facundo.munoz@cirad.fr>
 Description: Wraps local-global alignment algorithm borrwed from package Biostrings

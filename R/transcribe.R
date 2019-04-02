@@ -33,19 +33,23 @@ transcribe <- function(obj, fixes = NULL) {
          "Invalid fixes: ", names(fixes)[!idx])
   }
 
-  if (!all(idx <- fixes %in% rownames(obj))) {
+  nofix <- is.na(fixes)
+
+  if (!all(idx <- fixes[!nofix] %in% rownames(obj))) {
     stop("All fixes must be elements of the original candidates.\n",
          "If necessary, complete the list of candidates.\n",
-         "Invalid fixes: ", unname(fixes)[!idx])
+         "Invalid fixes: ", unname(fixes[!nofix])[!idx])
   }
 
   obj[, names(fixes)] <- 0
-  obj[fixes, names(fixes)] <- diag(length(fixes))
+  obj[fixes[!nofix], names(fixes[!nofix])] <- diag(length(fixes[!nofix]))
 
   function(x) {
 
     unm.idx <- which(unmatched(obj))
-    if (any(idx <- x %in% names(unm.idx))) {
+    nofixes.idx <- which(is.na(fixes))
+
+    if (any(idx <- x %in% setdiff(names(unm.idx), names(nofixes.idx)))) {
       stop("Cannot transcribe ",
            paste(x[idx], collapse = ", "), ".\n",
            "Please fix these unmatched terms using fixes."
@@ -54,6 +58,9 @@ transcribe <- function(obj, fixes = NULL) {
 
     ## Conversion table
     conv <- apply(obj, 2, function(i) rownames(obj)[which.max(i)])
+
+    ## Toponyms not converted
+    conv[names(nofixes.idx)] <- NA
 
     ## Additional elements not found in the table
     conv <- c(conv, setNames(nm = x[!x %in% names(conv)]))
