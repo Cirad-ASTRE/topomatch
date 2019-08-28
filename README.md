@@ -3,6 +3,8 @@
 topomatch
 =========
 
+## This project moved to https://forgemia.inra.fr/umr-astre/topomatch/
+
 Helper function for matching toponyms from different sources, that can be written in slightly different ways. Allows to inspect the matching and act accordingly.
 
 ``` r
